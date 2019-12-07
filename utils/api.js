@@ -9,9 +9,9 @@ export function getInitData () {
 
 }
 
-export function getDecks () {
+export function loadDecks() {
   return AsyncStorage.getItem(API_KEY)
-    .then((decks) => console.log(decks))
+    // .then((decks) => console.log(decks))
 }
 
 export function storeDeck ({ entry, key }) {

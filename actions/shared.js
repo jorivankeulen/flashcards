@@ -1,12 +1,13 @@
-import { getInitData } from '../utils/api'
+import { getInitData, loadDecks } from '../utils/api'
 import { receiveDecks } from './decks'
 
 export function handleInitialData() {
   return (dispatch) => {
-    return getDecks()
-      .then((decks) => {
-        // console.log(decks)
-          dispatch(receiveDecks(decks))
+    console.log(loadDecks())
+    return loadDecks()
+      .then(decks => {
+        console.log(JSON.parse(decks))
+          // dispatch(receiveDecks(decks))
       })
   }
 }
