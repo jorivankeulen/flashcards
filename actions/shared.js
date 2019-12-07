@@ -6,8 +6,8 @@ export function handleInitialData() {
     console.log(loadDecks())
     return loadDecks()
       .then(decks => {
-        console.log(JSON.parse(decks))
-          // dispatch(receiveDecks(decks))
+        // console.log()
+          dispatch(receiveDecks(JSON.parse(decks)))
       })
   }
 }
