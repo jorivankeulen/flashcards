@@ -14,13 +14,13 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-const Tabs = createBottomTabNavigator({
-  Decks: Decks,
-    // navigationOptions: {
-      // tabBarLabel: 'All decks',
-      // tabBarIcon: ({ tintColor }) => <FontAwesome name='credit-card' size={30} color={tintColor} />
-    // }
-})
+// const Tabs = createBottomTabNavigator({
+//   Decks: Decks,
+//     // navigationOptions: {
+//       // tabBarLabel: 'All decks',
+//       // tabBarIcon: ({ tintColor }) => <FontAwesome name='credit-card' size={30} color={tintColor} />
+//     // }
+// })
 
 class App extends React.Component {
 
@@ -30,17 +30,18 @@ class App extends React.Component {
         <View style={{flex: 1}}>
           {/* <UdaciStatusBar backgroundColor={purple} barStyle="light-content" /> */}
           {/* <Tabs /> */}
-          <Tabs />
+          <Deck />
         </View>
       </Provider>
     )
   }
 }
 
-const AppNavigator = createStackNavigator({
-  App: {
-    screen: App,
-  },
-});
+// const AppNavigator = createStackNavigator({
+//   App: {
+//     screen: App,
+//   },
+// });
 
-export default createAppContainer(AppNavigator)
+// export default createAppContainer(AppNavigator)
+export default App
