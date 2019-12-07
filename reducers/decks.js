@@ -8,7 +8,6 @@ export function decks (state = {}, action) {
       ...action.decks,
     }
     case ADD_DECK :
-    // console.log(state)
       return {
         ...state,
         [action.deck.id]: action.deck

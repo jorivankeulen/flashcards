@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 // import { receiveDecks, addDeck } from '../actions/decks'
 // import { getInitData } from '../utils/api'
 import { handleInitialData } from '../actions/shared'
 import { gray } from '../utils/colors'
+
 
 class Decks extends Component {
     componentDidMount () {
@@ -19,15 +20,21 @@ class Decks extends Component {
         // console.log(decks)
         return (
             <View style={styles.deckList}>
-                {decks && Object.keys(decks).map((deck) => (
-                    <TouchableOpacity 
-                        key={deck} 
-                        style={styles.deckListItem}
-                        onPress={() => console.log(deck)}>
-                        <Text style={{fontSize: 20, textAlign: "center"}}>{decks[deck].name}</Text>
-                        <Text style={{fontSize: 16, color: gray, textAlign: "center"}}>{decks[deck].cards.length} cards</Text>
-                    </TouchableOpacity>
-                ))}
+                <FlatList
+                    data={Object.keys(decks)}
+                    renderItem={({ item }) => (
+                        <TouchableOpacity 
+                            key={item}
+                            onPress={() =>
+                                this.props.navigation.navigate("Deck", { id: item })
+                            }
+                            style={styles.deckListItem}
+                            // onPress={() => console.log(item)}
+                        >
+                            <Text style={{fontSize: 20, textAlign: "center"}}>{decks[item].name}</Text>
+                            <Text style={{fontSize: 16, color: gray, textAlign: "center"}}>{decks[item].cards.length} cards</Text>
+                        </TouchableOpacity>
+                    )} />
             </View>
         )
     }
