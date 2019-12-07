@@ -3,7 +3,7 @@ import { receiveDecks } from './decks'
 
 export function handleInitialData() {
   return (dispatch) => {
-    return getInitData()
+    return getDecks()
       .then((decks) => {
         // console.log(decks)
           dispatch(receiveDecks(decks))

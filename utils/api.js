@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-import { _getDecks } from './_DATA'
+import { _getDecks, formatDeck } from './_DATA'
 
 const API_KEY = "Flashcards:decks" 
 
@@ -11,10 +11,12 @@ export function getInitData () {
 
 export function getDecks () {
   return AsyncStorage.getItem(API_KEY)
-    .then((decks) => decks)
+    .then((decks) => console.log(decks))
 }
 
-export function submitDecks ({ entry, key }) {
+export function storeDeck ({ entry, key }) {
+    // console.log(entry )
+    // console.log(key)
     return AsyncStorage.mergeItem(API_KEY, JSON.stringify({
       [key]: entry
     }))

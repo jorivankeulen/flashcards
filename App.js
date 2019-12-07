@@ -8,6 +8,7 @@ import middleware from './middleware'
 // import { Constants } from 'expo'
 import Decks from './components/Decks'
 import Deck from './components/Deck'
+import AddDeck from './components/AddDeck'
 import { FontAwesome } from '@expo/vector-icons'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 // import { createAppContainer } from 'react-navigation';
@@ -30,7 +31,7 @@ class App extends React.Component {
         <View style={{flex: 1}}>
           {/* <UdaciStatusBar backgroundColor={purple} barStyle="light-content" /> */}
           {/* <Tabs /> */}
-          <Deck />
+          <AddDeck />
         </View>
       </Provider>
     )

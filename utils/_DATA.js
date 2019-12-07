@@ -25,7 +25,7 @@ function generateUID () {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
-function formatDeck ({ name }) {
+export function formatDeck (name) {
     return {
         id: generateUID(),
         timestamp: Date.now(),
@@ -34,7 +34,7 @@ function formatDeck ({ name }) {
     }
 }
 
-function addCard ({deckID, question, answer}) {
+export function addCard ({deckID, question, answer}) {
     decks = {
         ...decks,
         [deckID]: {

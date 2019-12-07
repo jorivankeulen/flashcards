@@ -3,15 +3,15 @@ import { RECEIVE_DECKS, ADD_DECK } from '../actions/decks'
 export function decks (state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS :
-      // console.log(action)
-      return {
-        ...state,
-        ...action.decks,
-      }
+    return {
+      ...state,
+      ...action.decks,
+    }
     case ADD_DECK :
+    // console.log(state)
       return {
         ...state,
-        ...action.deck
+        [action.deck.id]: action.deck
       }
     default :
       return state
