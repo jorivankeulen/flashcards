@@ -18,11 +18,11 @@ class AddDeck extends Component {
     submit = () => {
         this.props.dispatch(handleAddDeck(this.state.name))
     }
-    componentDidMount () {
-        this.props.dispatch(handleInitialData())
-    // getInitData()
-    //   .then((entries) => dispatch(receiveEntries(entries)))
-    }
+    // componentDidMount () {
+    //     this.props.dispatch(handleInitialData())
+    // // getInitData()
+    // //   .then((entries) => dispatch(receiveEntries(entries)))
+    // }
     render() {
         const { name } = this.state
         return (

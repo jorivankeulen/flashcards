@@ -13,7 +13,22 @@ export function loadDecks() {
 }
 
 export function storeDeck ({ entry, key }) {
-    return AsyncStorage.mergeItem(API_KEY, JSON.stringify({
-      [key]: entry
-    }))
+  return AsyncStorage.mergeItem(API_KEY, JSON.stringify({
+    [key]: entry
+  }))
+}
+
+export function storeCard ({deck, question, answer}) {
+  const key = deck.id
+  const card = [question, answer]
+  const entry = {
+    ...deck,
+    cards: [
+      ...deck.cards,
+      card
+    ]
   }
+  return AsyncStorage.mergeItem(API_KEY, JSON.stringify({
+    [key]: entry
+  }))
+}

@@ -22,9 +22,9 @@ class Decks extends Component {
             <View style={styles.deckList}>
                 <FlatList
                     data={Object.keys(decks)}
+                    keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) => (
                         <TouchableOpacity 
-                            key={item}
                             onPress={() =>
                                 this.props.navigation.navigate("Deck", { id: item })
                             }

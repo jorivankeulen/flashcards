@@ -4,13 +4,10 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 
 class Deck extends Component {
-    componentDidMount () {
-        this.props.dispatch(handleInitialData())
-        // getInitData()
-        //   .then((entries) => dispatch(receiveEntries(entries)))
-      }
+
     render() {
         const {deck} = this.props
+        // console.log(deck)
         return (
             <View>
                 <Text>{deck && deck.name}</Text>
@@ -22,7 +19,9 @@ class Deck extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity  
                     style={styles.addBtn}
-                    onPress={() => console.log(deck.id)}>
+                    onPress={() =>
+                        this.props.navigation.navigate("AddCard", { deck: deck })
+                    }>
                     <Text style={{fontSize: 20, textAlign: "center"}}>Add card</Text>
                 </TouchableOpacity>
             </View>
@@ -43,10 +42,8 @@ const styles = StyleSheet.create({
     },
 })
 
-function mapStateToProps({decks}, {id}) {
-    const deck = decks[Object.keys(decks)[0]]
-    console.log(decks[Object.keys(decks)[0]])
-
+function mapStateToProps(decks, {navigation}) {
+    const deck = decks.decks[navigation.state.params.id]
     return {
         deck
     }
