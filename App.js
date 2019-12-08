@@ -18,7 +18,15 @@ import {
 } from "react-navigation-tabs";
 import Constants from "expo-constants";
 import { FontAwesome } from '@expo/vector-icons'
+import { setLocalNotification } from './utils/notifications'
 
+function Statusbar ({backgroundColor, ...props}) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const _TabNavigator =
   Platform.OS === "ios"
@@ -94,11 +102,14 @@ const MainNavigation = createStackNavigator({
 const Navigation = createAppContainer(MainNavigation);
 
 class App extends React.Component {
-  
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>
         <View style={{flex: 1}}>
+          <Statusbar backgroundColor={purple} barStyle="light-content" />
           <Navigation />
         </View>
       </Provider>

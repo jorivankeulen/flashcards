@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import { handleAddCard } from '../actions/decks'
+import { NavigationActions } from 'react-navigation'
 
 
 class AddCard extends Component {
@@ -21,6 +22,10 @@ class AddCard extends Component {
             question: this.state.q,
             answer: this.state.a,
         }))
+        this.back()
+    }
+    back = () => {
+        this.props.navigation.dispatch(NavigationActions.back())
     }
 
     render() {

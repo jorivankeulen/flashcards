@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import TextButton from './TextButton'
-
+import {
+    clearLocalNotification,
+    setLocalNotification
+  } from '../utils/notifications'
+import { NavigationActions } from 'react-navigation'
 
 class Quiz extends Component {
     
@@ -31,12 +35,21 @@ class Quiz extends Component {
         }))
     }
 
+    back = () => {
+        this.props.navigation.dispatch(NavigationActions.back())
+    }
+
     render() {
         const { deck } = this.props
         console.log(deck)
         const stepTotal = deck 
             ? deck.cards.length
             : 0
+
+        if (stepText > stepTotal) {
+            clearLocalNotification()
+                .then(setLocalNotification)
+        }
 
         const { step, correct, showAnswer } = this.state
         const stepText = step + 1
@@ -77,7 +90,12 @@ class Quiz extends Component {
                     </View>
                 }
                 {stepText > stepTotal &&
-                    <Text>You got {correct} out of {stepTotal}</Text>
+                    <View>
+                        <Text>You got {correct} out of {stepTotal}</Text>
+                        <TextButton style={{padding: 10}} onPress={this.back}>
+                            Back
+                        </TextButton>
+                    </View>
                 }
             </View>
         )
