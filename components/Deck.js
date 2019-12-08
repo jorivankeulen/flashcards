@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
-import { handleInitialData } from '../actions/shared'
 
 class Deck extends Component {
-
     render() {
         const {deck} = this.props
-        // console.log(deck)
         return (
             <View>
                 <Text>{deck && deck.name}</Text>
                 <Text>{deck && deck.cards.length} cards</Text>
                 <TouchableOpacity  
                     style={styles.quizBtn}
-                    onPress={() => console.log(deck.id)}>
+                    onPress={() =>
+                        this.props.navigation.navigate("Quiz", { deck: deck })
+                    }>
                     <Text style={{fontSize: 20, textAlign: "center"}}>Quiz</Text>
                 </TouchableOpacity>
                 <TouchableOpacity  

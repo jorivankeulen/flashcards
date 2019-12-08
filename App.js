@@ -5,13 +5,11 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import middleware from './middleware'
 import { purple, white } from './utils/colors'
-// import { Constants } from 'expo'
 import Decks from './components/Decks'
 import Deck from './components/Deck'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
-import { FontAwesome } from '@expo/vector-icons'
-
+import Quiz from './components/Quiz'
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import {
@@ -19,6 +17,7 @@ import {
   createMaterialTopTabNavigator
 } from "react-navigation-tabs";
 import Constants from "expo-constants";
+import { FontAwesome } from '@expo/vector-icons'
 
 
 const _TabNavigator =
@@ -74,6 +73,15 @@ const MainNavigation = createStackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    })
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: ({ navigation }) => ({
       headerTintColor: white,
       headerStyle: {

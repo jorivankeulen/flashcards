@@ -15,9 +15,7 @@ class AddCard extends Component {
             [type]: e
         }))
     }
-    
     submit = () => {
-        // console.log(this.props)
         this.props.dispatch(handleAddCard({
             deck: this.props.deck,
             question: this.state.q,
