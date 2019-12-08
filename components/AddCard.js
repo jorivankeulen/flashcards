@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { connect } from 'react-redux'
 import { handleAddCard } from '../actions/decks'
 import { NavigationActions } from 'react-navigation'
+import { lightPurp } from '../utils/colors'
 
 
 class AddCard extends Component {
@@ -17,10 +18,14 @@ class AddCard extends Component {
         }))
     }
     submit = () => {
+        const { q, a } = this.state
+
+        if (q === '' || a === '') { return }
+
         this.props.dispatch(handleAddCard({
             deck: this.props.deck,
-            question: this.state.q,
-            answer: this.state.a,
+            question: q,
+            answer: a,
         }))
         this.setState(() => ({
             a: '',
@@ -35,27 +40,68 @@ class AddCard extends Component {
     render() {
         const { q, a } = this.state
         return (
-            <View>
-                <Text>Add card</Text>
+            <View style={{height: '100%', alignItems: "center"}}>
+                <Text style={styles.title}>Add card</Text>
                 <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                    style={styles.input}
                     value={q}
                     placeholder="Question"
                     onChangeText={(e) => this.onChangeText(e, 'q')}>
                 </TextInput>
                 <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                    style={styles.input}
                     value={a}
                     placeholder="Answer"
                     onChangeText={(e) => this.onChangeText(e, 'a')}>
                 </TextInput>
-                <TouchableOpacity onPress={this.submit}>
-                    <Text>Submit</Text>
+                <TouchableOpacity 
+                    onPress={this.submit}
+                    style={styles.addBtn}>
+                    <Text style={{fontSize: 20, textAlign: "center", color: "#ffffff"}}>
+                        Save card
+                    </Text>
                 </TouchableOpacity>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    title: {
+        textAlign: 'center',
+        paddingTop: 56,
+        paddingBottom: 8,
+        fontSize: 32,
+        fontWeight: "700",
+    },
+    subTitle: {
+        textAlign: 'center',
+        paddingTop: 8,
+        paddingBottom: 24,
+        fontSize: 26,
+        fontWeight: "700",
+    },
+    addBtn: {
+        width: 200,
+        borderRadius: 5,
+        textAlign: 'center',
+        marginTop: 12,
+        marginBottom: 12,
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: lightPurp,
+    },
+    input: {
+        width: 300,
+        height: 40,
+        borderColor: 'gray', 
+        borderWidth: 1,
+        borderRadius: 5,
+        marginTop: 12,
+        marginBottom: 12,
+        padding: 8,
+    }
+})
 
 function mapStateToProps(state, {navigation}) {
 

@@ -43,8 +43,8 @@ class Decks extends Component {
 const styles = StyleSheet.create({
     deckListItem: {
         textAlign: 'center',
-        paddingTop: 12,
-        paddingBottom: 12,
+        paddingTop: 20,
+        paddingBottom: 20,
         borderBottomWidth: 1,
         borderBottomColor: gray
     }

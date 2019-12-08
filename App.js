@@ -17,7 +17,7 @@ import {
   createMaterialTopTabNavigator
 } from "react-navigation-tabs";
 import Constants from "expo-constants";
-import { FontAwesome } from '@expo/vector-icons'
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { setLocalNotification } from './utils/notifications'
 
 function Statusbar ({backgroundColor, ...props}) {
@@ -37,10 +37,18 @@ const TabNavigator = _TabNavigator(
   {
     Decks: {
       screen: Decks,
-    },
+      navigationOptions: {
+        tabBarLabel: 'All Decks',
+        tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='cards-outline' size={30} color={tintColor} />
+      },
+  },
     AddDeck: {
       screen: AddDeck,
-    },
+      navigationOptions: {
+        tabBarLabel: 'New Deck',
+        tabBarIcon: ({ tintColor }) => <MaterialIcons name='add-circle-outline' size={30} color={tintColor} />
+      },
+},
   },
   {
     navigationOptions: {

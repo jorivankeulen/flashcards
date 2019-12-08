@@ -7,6 +7,13 @@ import {
     setLocalNotification
   } from '../utils/notifications'
 import { NavigationActions } from 'react-navigation'
+import { 
+    white, 
+    green,
+    red,
+    gray,
+    lightPurp
+} from '../utils/colors'
 
 class Quiz extends Component {
     
@@ -35,6 +42,14 @@ class Quiz extends Component {
         }))
     }
 
+    restart = () => {
+        this.setState(() => ({
+            step: 0,
+            correct: 0,
+            showAnswer: false,
+        }))
+    }
+
     back = () => {
         this.props.navigation.dispatch(NavigationActions.back())
     }
@@ -56,42 +71,52 @@ class Quiz extends Component {
         return (
             <View>
                 {stepText <= stepTotal && 
-                    <View>
-                        <Text>Question { stepText } of { stepTotal }</Text>
+                    <View style={{height: '100%', alignItems: "center"}}>
+                        <Text style={{padding: 10}}>Question { stepText } of { stepTotal }</Text>
                         {!showAnswer && 
                             <View>
-                                <Text>{ deck.cards[step][0]}?</Text>
-                                <TextButton style={{padding: 10}} onPress={this.flipCard}>
+                                <Text style={styles.title}>{ deck.cards[step][0]}?</Text>
+                                <TextButton style={{padding: 10, textTransform: 'uppercase'}} onPress={this.flipCard}>
                                     Show answer
                                 </TextButton>
                             </View>
                         }
                         {showAnswer && 
-                            <View>                            
-                                <Text>{ deck.cards[step][1]}!</Text>
-                                <TextButton style={{padding: 10}} onPress={this.flipCard}>
+                            <View>     
+                                <Text style={styles.title}>{ deck.cards[step][1]}!</Text>
+                                <TextButton style={{padding: 10, textTransform: 'uppercase'}} onPress={this.flipCard}>
                                     Show question
                                 </TextButton>
                             </View>                            
                         }
-                        <TouchableOpacity  
+                        <TouchableOpacity 
+                            style={styles.correctBtn} 
                             onPress={() =>
                                 this.answer(true)
                             }>
-                            <Text style={{fontSize: 20, textAlign: "center"}}>Correct</Text>
+                            <Text style={{fontSize: 20, textAlign: "center", color: white}}>Correct</Text>
                         </TouchableOpacity>
                         <TouchableOpacity  
+                            style={styles.incorrectBtn}
                             onPress={() =>
                                 this.answer(false)
                             }>
-                            <Text style={{fontSize: 20, textAlign: "center"}}>Incorrect</Text>
+                            <Text style={{fontSize: 20, textAlign: "center", color: white}}>Incorrect</Text>
                         </TouchableOpacity>
 
                     </View>
                 }
                 {stepText > stepTotal &&
-                    <View>
-                        <Text>You got {correct} out of {stepTotal}</Text>
+                    <View style={{height: '100%', alignItems: "center"}}>
+                        <Text style={styles.title}>You got {correct} out of {stepTotal}</Text>
+                        <TouchableOpacity 
+                            style={styles.restartBtn} 
+                            onPress={() =>
+                                this.restart()
+                            }>
+                            <Text style={{fontSize: 20, textAlign: "center", color: white}}>Take again</Text>
+                        </TouchableOpacity>
+
                         <TextButton style={{padding: 10}} onPress={this.back}>
                             Back
                         </TextButton>
@@ -102,10 +127,54 @@ class Quiz extends Component {
     }
 }
 
+const styles = StyleSheet.create({
+    title: {
+        textAlign: 'center',
+        paddingTop: 56,
+        paddingBottom: 8,
+        fontSize: 32,
+        fontWeight: "700",
+    },
+    subTitle: {
+        textAlign: 'center',
+        paddingTop: 8,
+        paddingBottom: 24,
+        fontSize: 26,
+        fontWeight: "300",
+    },
+    correctBtn: {
+        width: 200,
+        borderRadius: 5,
+        textAlign: 'center',
+        marginTop: 12,
+        marginBottom: 12,
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: green,  
+    },
+    incorrectBtn: {
+        width: 200,
+        borderRadius: 5,
+        textAlign: 'center',
+        marginTop: 12,
+        marginBottom: 12,
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: red,      
+    },
+    restartBtn: {
+        width: 200,
+        borderRadius: 5,
+        textAlign: 'center',
+        marginTop: 12,
+        marginBottom: 12,
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: lightPurp,
+    },
+})
+
 function mapStateToProps(decks, {navigation}) {
-    // console.log(decks.decks)
-    // console.log(navigation.state.params.deck)
-    // const deck = decks.decks[navigation.state.params.id]
     const deck = navigation.state.params.deck
     return {
         deck

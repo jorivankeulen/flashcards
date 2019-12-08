@@ -1,27 +1,29 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
+import { white, lightPurp } from '../utils/colors'
 
 class Deck extends Component {
     render() {
         const {deck} = this.props
         return (
-            <View>
-                <Text>{deck && deck.name}</Text>
-                <Text>{deck && deck.cards.length} cards</Text>
+            <View style={{height: '100%', alignItems: "center"}}>
+                <Text style={styles.title}>{deck && deck.name}</Text>
+                <Text style={styles.subTitle}>{deck && deck.cards.length} cards</Text>
                 <TouchableOpacity  
                     style={styles.quizBtn}
-                    onPress={() =>
-                        this.props.navigation.navigate("Quiz", { deck: deck })
+                    onPress={() => deck.cards.length === 0 
+                        ? this.props.navigation.navigate("AddCard", { deck: deck })
+                        : this.props.navigation.navigate("Quiz", { deck: deck })
                     }>
-                    <Text style={{fontSize: 20, textAlign: "center"}}>Quiz</Text>
+                    <Text style={{fontSize: 20, textAlign: "center", color: "#ffffff"}}>Take Quiz</Text>
                 </TouchableOpacity>
                 <TouchableOpacity  
                     style={styles.addBtn}
                     onPress={() =>
                         this.props.navigation.navigate("AddCard", { deck: deck })
                     }>
-                    <Text style={{fontSize: 20, textAlign: "center"}}>Add card</Text>
+                    <Text style={{fontSize: 20, textAlign: "center", color: lightPurp}}>Add Cards</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -29,15 +31,42 @@ class Deck extends Component {
 }
 
 const styles = StyleSheet.create({
-    quizBtn: {
+    title: {
         textAlign: 'center',
+        paddingTop: 56,
+        paddingBottom: 8,
+        fontSize: 32,
+        fontWeight: "700",
+    },
+    subTitle: {
+        textAlign: 'center',
+        paddingTop: 8,
+        paddingBottom: 24,
+        fontSize: 26,
+        fontWeight: "300",
+    },
+    quizBtn: {
+        width: 200,
+        borderRadius: 5,
+        textAlign: 'center',
+        marginTop: 12,
+        marginBottom: 12,
         paddingTop: 12,
         paddingBottom: 12,
+        backgroundColor: lightPurp,
+        
     },
     addBtn: {
+        width: 200,
+        borderRadius: 5,
         textAlign: 'center',
+        marginTop: 12,
+        marginBottom: 12,
         paddingTop: 12,
         paddingBottom: 12,
+        backgroundColor: white,
+        borderColor: lightPurp,
+        borderWidth: 1,
     },
 })
 
