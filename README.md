@@ -17,3 +17,4 @@ To take a quiz, visit a deck and press `Take Quiz`
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 * best used with Expo
+* Developed and tested on an XCode iOS simulator, and via the Android Expo app on a Samsung S9
