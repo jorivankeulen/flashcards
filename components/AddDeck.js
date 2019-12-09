@@ -45,7 +45,7 @@ class AddDeck extends Component {
                     onPress={this.submit}
                     style={styles.addBtn}>
                     <Text style={{fontSize: 20, textAlign: "center", color: "#ffffff"}}>
-                        Save deck
+                        Create deck
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -89,5 +89,6 @@ const styles = StyleSheet.create({
         padding: 8,
     }
 })
+
 
 export default connect()(AddDeck)

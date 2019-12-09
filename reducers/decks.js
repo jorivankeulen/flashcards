@@ -14,6 +14,7 @@ export function decks (state = {}, action) {
     case ADD_DECK :
       return {
         ...state,
+        // newestID: action.deck.id,
         [action.deck.id]: action.deck
       }
     case ADD_CARD :

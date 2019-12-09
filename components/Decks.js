@@ -3,21 +3,30 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native
 import { connect } from 'react-redux'
 // import { receiveDecks, addDeck } from '../actions/decks'
 // import { getInitData } from '../utils/api'
-import { handleInitialData } from '../actions/shared'
+import { handleInitialData, clearNewID } from '../actions/shared'
 import { gray } from '../utils/colors'
 
 
 class Decks extends Component {
     componentDidMount () {
         this.props.dispatch(handleInitialData())
-        // getInitData()
-        //   .then((entries) => dispatch(receiveEntries(entries)))
       }
+    componentDidUpdate() {
+        const { shared } = this.props
 
+        if (shared.newID && shared.newID.length > 1 ) {
+            this.gotoNewDeck(shared.newID)
+        }
+    }
+    gotoNewDeck = (id) => {
+        this.props.dispatch(clearNewID())
+        this.props.navigation.navigate("Deck", { id: id })
+    }
+    
     render() {
-
         const { decks } = this.props
-        // console.log(decks)
+       
+            
         return (
             <View style={styles.deckList}>
                 <FlatList
@@ -50,10 +59,10 @@ const styles = StyleSheet.create({
     }
 })
 
-function mapStateToProps({decks}) {
-    console.log(decks)
+function mapStateToProps({shared, decks}) {
     return {
-        decks
+        decks,
+        shared
     }
 }
 
